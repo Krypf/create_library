@@ -14,6 +14,11 @@ mkdir -p $LIBRARY_NAME/tests
 
 # __init__.pyファイルの作成
 touch $LIBRARY_NAME/$LIBRARY_NAME/__init__.py
+# requirements ファイルの作成
+touch $LIBRARY_NAME/requirements.txt
+# 最上層ファイルの作成
+touch $LIBRARY_NAME/main.py
+touch $LIBRARY_NAME/run.sh
 
 # example_module.pyの作成
 cat <<EOL > $LIBRARY_NAME/$LIBRARY_NAME/example_module.py
@@ -37,12 +42,14 @@ EOL
 # setup.pyの作成
 cat <<EOL > $LIBRARY_NAME/setup.py
 from setuptools import setup, find_packages
+with open('requirements.txt') as f:
+    requirements = f.read().splitlines()
 
 setup(
     name="$LIBRARY_NAME",
     version="0.1",
     packages=find_packages(),
-    install_requires=[],
+    install_requires=requirements,
     test_suite='tests',
 )
 EOL
@@ -51,13 +58,18 @@ EOL
 cat <<EOL > $LIBRARY_NAME/README.md
 # $LIBRARY_NAME
 
-This is a simple Python library.
+This is a Python library "$LIBRARY_NAME".
 EOL
 
 # .gitignoreの作成
 cat <<EOL > $LIBRARY_NAME/.gitignore
 __pycache__/
 *.pyc
+.DS_Store
+[0-9][0-9].py
+*.env
+*.env.*
+data/
 EOL
 
 # LICENSE.txtの作成
