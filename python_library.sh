@@ -10,6 +10,7 @@ fi
 
 # ディレクトリ構造の作成
 mkdir -p $LIBRARY_NAME/$LIBRARY_NAME
+mkdir -p $LIBRARY_NAME/$LIBRARY_NAME
 mkdir -p $LIBRARY_NAME/tests
 
 # __init__.pyファイルの作成
@@ -19,17 +20,24 @@ touch $LIBRARY_NAME/requirements.txt
 # 最上層ファイルの作成
 touch $LIBRARY_NAME/main.py
 touch $LIBRARY_NAME/run.sh
+echo "python main.py" >> $LIBRARY_NAME/run.sh
 
 # example_module.pyの作成
 cat <<EOL > $LIBRARY_NAME/$LIBRARY_NAME/example_module.py
-def hello_world():
-    return "Hello, World!"
+def main():
+    print("Example")
+    return 0
+
+if __name__ == '__main__':
+    main()
 EOL
 
 # test_example.pyの作成
 cat <<EOL > $LIBRARY_NAME/tests/test_example.py
 import unittest
-from $LIBRARY_NAME.example_module import hello_world
+
+def hello_world():
+    return "Hello, World!"
 
 class TestExampleModule(unittest.TestCase):
     def test_hello_world(self):
@@ -76,7 +84,7 @@ EOL
 cat <<EOL > $LIBRARY_NAME/LICENSE.txt
 MIT License
 
-Copyright (c) $(date +%Y) Your Name
+Copyright (c) $(date +%Y) Krypf
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
