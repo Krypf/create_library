@@ -6,7 +6,6 @@ private_flag="false"
 # Function to display usage
 usage() {
     echo "Usage: $0 [--private|-p] <library_name>"
-    exit 1
 }
 
 # Parse command-line arguments
@@ -26,6 +25,7 @@ done
 # ライブラリ名をチェック
 if [ -z "$LIBRARY_NAME" ]; then
     usage  # ライブラリ名が指定されていない場合は usage を表示
+    exit 1
 fi
 
 # 現在のディレクトリがホームディレクトリかどうかを確認
