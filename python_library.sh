@@ -10,7 +10,6 @@ fi
 
 # ディレクトリ構造の作成
 mkdir -p $LIBRARY_NAME/$LIBRARY_NAME
-mkdir -p $LIBRARY_NAME/$LIBRARY_NAME
 mkdir -p $LIBRARY_NAME/tests
 
 # __init__.pyファイルの作成
